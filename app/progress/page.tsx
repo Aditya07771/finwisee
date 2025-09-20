@@ -1,5 +1,5 @@
-import { DashboardLayout } from "@/components/dashboard-layout"
-import { GamificationSystem } from "@/components/gamification-system"
+import { DashboardLayout } from "@/components/Dashboard/dashboard-layout"
+import { GamificationSystem } from "@/components/Dashboard/gamification-system"
 
 export default function ProgressPage() {
   return (

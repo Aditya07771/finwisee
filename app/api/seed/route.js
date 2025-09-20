@@ -1,6 +1,24 @@
 import { seedTransactions } from "@/actions/seed";
+import { auth } from "@clerk/nextjs/server";
 
 export async function GET() {
-  const result = await seedTransactions();
-  return Response.json(result);
+  try {
+    // Check authentication
+    const { userId } = await auth();
+    if (!userId) {
+      return Response.json(
+        { success: false, error: "Unauthorized" },
+        { status: 401 }
+      );
+    }
+
+    const result = await seedTransactions();
+    return Response.json(result);
+  } catch (error) {
+    console.error("Seed route error:", error);
+    return Response.json(
+      { success: false, error: error.message },
+      { status: 500 }
+    );
+  }
 }

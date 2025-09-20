@@ -1,3 +1,4 @@
+//components/Dashboard/ai-financial-coach.tsx
 "use client"
 
 import { useState, useRef, useEffect } from "react"

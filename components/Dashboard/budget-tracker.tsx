@@ -1,3 +1,4 @@
+//components/Dashboard/budget-tracker.tsx
 "use client"
 
 import { useState } from "react"
@@ -63,7 +64,7 @@ export function BudgetTracker() {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="max-w-7xl mx-auto p-6 mt-24 ">
       {/* Header */}
       <div className="flex flex-col space-y-2">
         <h1 className="text-3xl font-bold text-balance">Budget Tracker</h1>

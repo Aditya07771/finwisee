@@ -78,9 +78,20 @@ export function TransactionTable({ transactions }) {
   const [currentPage, setCurrentPage] = useState(1);
   const router = useRouter();
 
+  if (!transactions || !Array.isArray(transactions)) {
+  console.error("Transactions is not an array:", transactions);
+  return (
+    <div className="text-center text-muted-foreground p-8">
+      <p>No transaction data available</p>
+      <p className="text-sm">Please check if transactions is properly formatted</p>
+    </div>
+  );
+}
+
   // Memoized filtered and sorted transactions
   const filteredAndSortedTransactions = useMemo(() => {
-    let result = [...transactions];
+    // let result = [...transactions];
+    let result = Array.isArray(transactions) ? [...transactions] : [];
 
     // Apply search filter
     if (searchTerm) {

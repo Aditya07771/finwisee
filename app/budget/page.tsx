@@ -1,10 +1,10 @@
-import { DashboardLayout } from "@/components/dashboard-layout"
-import { BudgetTracker } from "@/components/budget-tracker"
+import { DashboardLayout } from "@/components/Dashboard/dashboard-layout"
+import { BudgetTracker } from "@/components/Dashboard/budget-tracker"
 
 export default function BudgetPage() {
   return (
-    <DashboardLayout>
+  
       <BudgetTracker />
-    </DashboardLayout>
+
   )
 }
