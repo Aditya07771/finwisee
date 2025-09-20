@@ -1,5 +1,3 @@
-//main/dashboard/_components/transaction-overview.jsx
-
 "use client";
 
 import { useState } from "react";

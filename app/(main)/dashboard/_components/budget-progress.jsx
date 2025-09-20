@@ -1,4 +1,3 @@
-//main/dashboard/_components/budget-progress.jsx
 "use client";
 
 import { useState, useEffect } from "react";

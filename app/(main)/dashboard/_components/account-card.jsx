@@ -1,5 +1,3 @@
-//main/dashboard/_components/account-card.jsx
-
 "use client";
 
 import { ArrowUpRight, ArrowDownRight, CreditCard } from "lucide-react";

@@ -6,8 +6,8 @@ import crypto from "crypto";
 const db = new PrismaClient();
 
 // Hardcoded test IDs (replace if needed)
-const USER_ID = "3e6898d5-5ee1-4176-93c2-c3e55661d5a2";
-const ACCOUNT_ID = "cf6965ce-69d6-4834-ac14-e33ac24d69e4";
+const USER_ID = "1decc9d1-31e5-460a-be59-9b68e7fc9517";
+const ACCOUNT_ID = "971b5e0f-be7f-40b0-8780-88d629ef8500";
 
 // Categories with ranges
 const CATEGORIES = {

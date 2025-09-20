@@ -4,83 +4,75 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --background: oklch(1 0 0); /* Pure white background */
-  --foreground: oklch(0.35 0 0); /* Dark gray text */
-  --card: oklch(0.98 0 0); /* Light gray card background */
-  --card-foreground: oklch(0.35 0 0); /* Dark gray card text */
-  --popover: oklch(1 0 0); /* White popover background */
-  --popover-foreground: oklch(0.35 0 0); /* Dark gray popover text */
-  --primary: oklch(0.55 0.15 160); /* Emerald-600 primary color */
-  --primary-foreground: oklch(1 0 0); /* White text on primary */
-  --secondary: oklch(0.65 0.12 160); /* Emerald-500 secondary color */
-  --secondary-foreground: oklch(1 0 0); /* White text on secondary */
-  --muted: oklch(0.98 0 0); /* Light gray muted background */
-  --muted-foreground: oklch(0.45 0 0); /* Medium gray muted text */
-  --accent: oklch(0.65 0.12 160); /* Emerald-500 accent color */
-  --accent-foreground: oklch(1 0 0); /* White text on accent */
-  --destructive: oklch(0.55 0.2 25); /* Red for errors */
-  --destructive-foreground: oklch(1 0 0); /* White text on destructive */
-  --border: oklch(0.92 0 0); /* Light gray borders */
-  --input: oklch(0.98 0 0); /* Light gray input background */
-  --ring: oklch(0.55 0.15 160 / 0.5); /* Emerald focus ring */
-
-  /* Updated chart colors for financial data visualization */
-  --chart-1: oklch(0.7 0.15 160); /* Light emerald for savings */
-  --chart-2: oklch(0.65 0.2 45); /* Amber for expenses */
-  --chart-3: oklch(0.6 0.2 250); /* Blue for investments */
-  --chart-4: oklch(0.65 0.18 300); /* Purple for goals */
-  --chart-5: oklch(0.6 0.2 15); /* Orange for income */
-
-  --radius: 0.5rem; /* Rounded corners */
-
-  /* Updated sidebar colors for navigation */
-  --sidebar: oklch(0.99 0 0); /* Very light gray sidebar */
-  --sidebar-foreground: oklch(0.35 0 0); /* Dark gray sidebar text */
-  --sidebar-primary: oklch(0.55 0.15 160); /* Emerald sidebar primary */
-  --sidebar-primary-foreground: oklch(1 0 0); /* White sidebar primary text */
-  --sidebar-accent: oklch(0.65 0.12 160); /* Emerald sidebar accent */
-  --sidebar-accent-foreground: oklch(1 0 0); /* White sidebar accent text */
-  --sidebar-border: oklch(0.92 0 0); /* Light gray sidebar border */
-  --sidebar-ring: oklch(0.55 0.15 160 / 0.5); /* Emerald sidebar focus ring */
+  /* Updated color tokens for FinWise gamified theme */
+  --background: #f0f4f1; /* Light background for a fresh feel */
+  --foreground: #374151; /* Dark text for readability */
+  --card: #ffffff; /* White cards for content display */
+  --card-foreground: #374151; /* Dark text on cards */
+  --popover: #ffffff; /* White popovers for notifications */
+  --popover-foreground: #374151; /* Dark text in popovers */
+  --primary: #4caf50; /* Primary green for call-to-action buttons */
+  --primary-foreground: #ffffff; /* White text on primary buttons */
+  --secondary: #ffeb3b; /* Accent yellow for highlights */
+  --secondary-foreground: #374151; /* Dark text on secondary elements */
+  --muted: #f0f4f1; /* Muted background for less important sections */
+  --muted-foreground: #6b7280; /* Muted text */
+  --accent: #ffeb3b; /* Accent for achievements and notifications */
+  --accent-foreground: #374151; /* Dark text on accent elements */
+  --destructive: #dc2626; /* Red for any destructive actions */
+  --destructive-foreground: #ffffff; /* White text on destructive buttons */
+  --border: #e0e0e0; /* Light border for separation */
+  --input: #ffffff; /* White input fields for clarity */
+  --ring: rgba(76, 175, 80, 0.5); /* Soft green ring for focus states */
+  --chart-1: #4caf50; /* Green for positive chart data */
+  --chart-2: #ffeb3b; /* Yellow for warnings or highlights */
+  --chart-3: #dc2626; /* Red for negative data */
+  --chart-4: #2196f3; /* Blue for neutral data */
+  --chart-5: #9c27b0; /* Purple for additional data points */
+  --radius: 0.5rem; /* Rounded corners for a friendly feel */
+  --sidebar: #ffffff; /* White sidebar for content display */
+  --sidebar-foreground: #374151; /* Dark text in sidebar */
+  --sidebar-primary: #4caf50; /* Green sidebar highlights */
+  --sidebar-primary-foreground: #ffffff; /* White text on sidebar highlights */
+  --sidebar-accent: #ffeb3b; /* Yellow accents in sidebar */
+  --sidebar-accent-foreground: #374151; /* Dark text on sidebar accents */
+  --sidebar-border: #e0e0e0; /* Light border for sidebar separation */
+  --sidebar-ring: rgba(76, 175, 80, 0.5); /* Soft green ring for sidebar focus */
 }
 
 .dark {
-  --background: oklch(0.08 0 0); /* Very dark background */
-  --foreground: oklch(0.98 0 0); /* Light text */
-  --card: oklch(0.12 0 0); /* Dark card background */
-  --card-foreground: oklch(0.98 0 0); /* Light card text */
-  --popover: oklch(0.08 0 0); /* Dark popover background */
-  --popover-foreground: oklch(0.98 0 0); /* Light popover text */
-  --primary: oklch(0.65 0.12 160); /* Brighter emerald in dark mode */
-  --primary-foreground: oklch(0.08 0 0); /* Dark text on primary */
-  --secondary: oklch(0.2 0 0); /* Dark gray secondary */
-  --secondary-foreground: oklch(0.98 0 0); /* Light text on secondary */
-  --muted: oklch(0.2 0 0); /* Dark gray muted background */
-  --muted-foreground: oklch(0.7 0 0); /* Light gray muted text */
-  --accent: oklch(0.2 0 0); /* Dark gray accent */
-  --accent-foreground: oklch(0.98 0 0); /* Light text on accent */
-  --destructive: oklch(0.5 0.2 25); /* Darker red for errors */
-  --destructive-foreground: oklch(0.98 0 0); /* Light text on destructive */
-  --border: oklch(0.2 0 0); /* Dark gray borders */
-  --input: oklch(0.2 0 0); /* Dark gray input background */
-  --ring: oklch(0.65 0.12 160 / 0.5); /* Brighter emerald focus ring */
-
-  /* Updated dark mode chart colors */
-  --chart-1: oklch(0.6 0.15 160); /* Emerald for savings */
-  --chart-2: oklch(0.7 0.2 45); /* Brighter amber for expenses */
-  --chart-3: oklch(0.7 0.2 250); /* Brighter blue for investments */
-  --chart-4: oklch(0.7 0.18 300); /* Brighter purple for goals */
-  --chart-5: oklch(0.7 0.2 15); /* Brighter orange for income */
-
-  /* Updated dark mode sidebar colors */
-  --sidebar: oklch(0.12 0 0); /* Dark sidebar background */
-  --sidebar-foreground: oklch(0.98 0 0); /* Light sidebar text */
-  --sidebar-primary: oklch(0.65 0.12 160); /* Brighter emerald sidebar primary */
-  --sidebar-primary-foreground: oklch(0.08 0 0); /* Dark sidebar primary text */
-  --sidebar-accent: oklch(0.2 0 0); /* Dark gray sidebar accent */
-  --sidebar-accent-foreground: oklch(0.98 0 0); /* Light sidebar accent text */
-  --sidebar-border: oklch(0.2 0 0); /* Dark gray sidebar border */
-  --sidebar-ring: oklch(0.65 0.12 160 / 0.5); /* Brighter emerald sidebar focus ring */
+  --background: #1a1a1a;
+  --foreground: #ffffff;
+  --card: #2a2a2a;
+  --card-foreground: #ffffff;
+  --popover: #2a2a2a;
+  --popover-foreground: #ffffff;
+  --primary: #4caf50;
+  --primary-foreground: #ffffff;
+  --secondary: #ffeb3b;
+  --secondary-foreground: #1a1a1a;
+  --muted: #2a2a2a;
+  --muted-foreground: #9ca3af;
+  --accent: #ffeb3b;
+  --accent-foreground: #1a1a1a;
+  --destructive: #dc2626;
+  --destructive-foreground: #ffffff;
+  --border: #404040;
+  --input: #2a2a2a;
+  --ring: rgba(76, 175, 80, 0.5);
+  --chart-1: #4caf50;
+  --chart-2: #ffeb3b;
+  --chart-3: #dc2626;
+  --chart-4: #2196f3;
+  --chart-5: #9c27b0;
+  --sidebar: #2a2a2a;
+  --sidebar-foreground: #ffffff;
+  --sidebar-primary: #4caf50;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #ffeb3b;
+  --sidebar-accent-foreground: #1a1a1a;
+  --sidebar-border: #404040;
+  --sidebar-ring: rgba(76, 175, 80, 0.5);
 }
 
 @theme inline {
