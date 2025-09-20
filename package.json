@@ -67,6 +67,7 @@
     "react-router-dom": "^7.9.1",
     "react-spinners": "^0.17.0",
     "recharts": "latest",
+    "resend": "^6.1.0",
     "sonner": "^1.7.4",
     "tailwind-merge": "^2.5.5",
     "tailwindcss-animate": "^1.0.7",
