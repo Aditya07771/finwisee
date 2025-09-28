@@ -24,6 +24,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
+import Image from "next/image";
 
 const NavigationDropdown = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
@@ -223,7 +224,12 @@ const MobileMenu = ({ isOpen, onClose }) => {
         <div className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800">
           <div className="flex items-center space-x-2">
             <div className="w-8 h-8 bg-gradient-to-r from-primary to-primary-glow rounded-full flex items-center justify-center">
-              <span className="text-primary-foreground font-bold text-sm">F</span>
+              <Image className="text-primary-foreground font-bold text-lg"
+                src="/logoo.jpg"
+                alt="FinWise Logo"
+                width={24}
+                height={24}
+              />
             </div>
             <span className="text-lg font-bold gradient-title">FinWise</span>
           </div>
@@ -280,14 +286,23 @@ const Header = () => {
   return (
     <header className="fixed top-0 w-full bg-white dark:bg-gray-900 md:bg-background/80 md:backdrop-blur-md z-50 border-b border-gray-200 dark:border-gray-800 md:border-border/50 shadow-sm md:shadow-none">
       <nav className="container mx-auto px-4 py-3 md:py-4 flex items-center justify-between">
-        <Link href="/">
-          <div className="flex items-center space-x-2">
-            <div className="w-8 h-8 md:w-10 md:h-10 bg-gradient-to-r from-primary to-primary-glow rounded-full flex items-center justify-center shadow-lg">
-              <span className="text-primary-foreground font-bold text-sm md:text-lg">F</span>
-            </div>
-            <span className="text-xl md:text-2xl font-bold gradient-title">FinWise</span>
-          </div>
-        </Link>
+        <Link href="/" className="flex items-center">
+  <div className="relative group">
+    <Image 
+      src="/logo-finwisse.png"
+      alt="FinWise Logo"
+      width={150}
+      height={50}
+      className="h-10 md:h-12 lg:h-16 w-auto object-contain transition-all duration-300 ease-in-out 
+                 hover:scale-105 hover:drop-shadow-2xl filter hover:brightness-110
+                 opacity-90 hover:opacity-100"
+    />
+    {/* Optional: Add a subtle glow effect */}
+    <div className="absolute inset-0 bg-gradient-to-r from-primary/30 to-primary-glow/30 
+                    opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10
+                    blur-lg scale-125 rounded-xl"></div>
+  </div>
+</Link>
 
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center space-x-8">
