@@ -1,6 +1,9 @@
 import { seedTransactions } from "@/actions/seed";
 import { auth } from "@clerk/nextjs/server";
 
+// Add this export to prevent static generation
+export const dynamic = 'force-dynamic';
+
 export async function GET() {
   try {
     // Check authentication

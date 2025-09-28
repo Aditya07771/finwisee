@@ -14,6 +14,41 @@ const serializeAmount = (obj) => ({
   amount: obj.amount.toNumber(),
 });
 
+
+// Add this to your transaction.js server actions file for testing Gemini API
+export async function testGeminiAPI() {
+  try {
+    console.log("Testing Gemini API...");
+    
+    // Check if API key exists
+    const apiKey = process.env.GEMINI_API_KEY;
+    console.log("API Key exists:", !!apiKey);
+    console.log("API Key length:", apiKey?.length || 0);
+    
+    if (!apiKey) {
+      throw new Error("GEMINI_API_KEY is not set in environment variables");
+    }
+
+    const genAI = new GoogleGenerativeAI(apiKey);
+    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+
+    // Simple text test
+    const result = await model.generateContent("Say hello");
+    const response = await result.response;
+    const text = response.text();
+    
+    console.log("Gemini API test successful:", text);
+    return { success: true, message: text };
+    
+  } catch (error) {
+    console.error("Gemini API test failed:", error);
+    return { 
+      success: false, 
+      error: error.message,
+      stack: error.stack 
+    };
+  }
+}
 // Create Transaction
 export async function createTransaction(data) {
   try {
@@ -293,12 +328,30 @@ export async function getUserTransactions(query = {}) {
 
 // Scan Receipt Server Action (updated portion for transaction.js)
 // Scan Receipt Server Action (updated portion for transaction.js)
+// Updated scanReceipt function for your transaction.js server actions file
+
+
+// Replace your scanReceipt function with this network debugging version
+
+
+// Updated scanReceipt function with correct model names - ADD THIS TO THE TOP OF YOUR transaction.js FILE
+
+
 export async function scanReceipt(fileData) {
   try {
-    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+    console.log("Starting receipt scan...");
+    
+    // Check if API key exists
+    const apiKey = process.env.GEMINI_API_KEY;
+    if (!apiKey) {
+      throw new Error("AI service not configured. Please add GEMINI_API_KEY to your .env.local file");
+    }
 
-    // fileData is now a plain object: { data: base64String, type: mimeType, name: fileName, size: fileSize }
-    const { data: base64String, type: mimeType } = fileData;
+    const genAI = new GoogleGenerativeAI(apiKey);
+    
+    // Use a working model name from your available models
+    const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
+    console.log("Using model: gemini-2.5-flash");
 
     const prompt = `
       Analyze this receipt image and extract the following information in JSON format:
@@ -317,14 +370,16 @@ export async function scanReceipt(fileData) {
         "category": "string"
       }
 
-      If its not a receipt, return an empty object
+      If it's not a receipt, return an empty object {}
     `;
 
+    console.log("Calling Gemini API...");
+    
     const result = await model.generateContent([
       {
         inlineData: {
-          data: base64String,
-          mimeType: mimeType,
+          data: fileData.data,
+          mimeType: fileData.type,
         },
       },
       prompt,
@@ -332,27 +387,62 @@ export async function scanReceipt(fileData) {
 
     const response = await result.response;
     const text = response.text();
+    
+    console.log("Gemini API response:", text);
+    
     const cleanedText = text.replace(/```(?:json)?\n?/g, "").trim();
+    console.log("Cleaned response:", cleanedText);
 
     try {
       const data = JSON.parse(cleanedText);
-      return {
+      console.log("Parsed data:", data);
+      
+      // Check if response is empty object (not a receipt)
+      if (Object.keys(data).length === 0) {
+        throw new Error("This doesn't appear to be a receipt. Please try a different image.");
+      }
+
+      // Validate required fields
+      if (!data.amount) {
+        throw new Error("Could not extract amount from receipt. Please try a clearer image.");
+      }
+
+      const result = {
         amount: parseFloat(data.amount),
-        date: new Date(data.date),
-        description: data.description,
-        category: data.category,
-        merchantName: data.merchantName,
+        date: new Date(data.date || new Date()),
+        description: data.description || "Receipt scan",
+        category: data.category || "other-expense",
+        merchantName: data.merchantName || "",
       };
+
+      console.log("Final result:", result);
+      return result;
+      
     } catch (parseError) {
       console.error("Error parsing JSON response:", parseError);
-      throw new Error("Invalid response format from Gemini");
+      console.error("Raw response text:", text);
+      throw new Error("Could not understand the receipt. Please try a clearer image.");
     }
   } catch (error) {
     console.error("Error scanning receipt:", error);
-    throw new Error("Failed to scan receipt");
+    
+    // More specific error messages
+    if (error.message.includes("GEMINI_API_KEY")) {
+      throw new Error("AI service configuration error. Please contact support.");
+    }
+    
+    if (error.message.includes("quota") || error.message.includes("limit")) {
+      throw new Error("AI service temporarily unavailable. Please try again later.");
+    }
+    
+    // Re-throw custom errors as-is
+    if (error.message.includes("receipt") || error.message.includes("image")) {
+      throw error;
+    }
+    
+    throw new Error("Failed to scan receipt. Please try again.");
   }
 }
-
 // Helper function to calculate next recurring date
 function calculateNextRecurringDate(startDate, interval) {
   const date = new Date(startDate);
