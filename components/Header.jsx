@@ -69,7 +69,7 @@ const NavigationDropdown = ({ isOpen, onClose }) => {
           name: "AI Coach",
           description: "Personal finance AI",
           icon: Bot,
-          href: "/ai-coach",
+          href: "/coach",
           color: "text-indigo-500"
         },
         {
@@ -197,7 +197,20 @@ const MobileMenu = ({ isOpen, onClose }) => {
   const mobileMenuItems = [
     { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
     { name: "Budget Tracker", href: "/budget", icon: PieChart },
-    { name: "Goals", href: "/goals", icon: Target },
+    { name: "Progress", href: "/progress", icon: Target },
+    {
+          name: "Gamification",
+          icon: Trophy,
+          href: "/gamification",
+        },
+    {
+          name: "Micro Investment",
+          description: "Round-up investing",
+          icon: Coins,
+          href: "/micro-investment",
+          color: "text-yellow-500"
+        },
+    
     { name: "AI Coach", href: "/ai-coach", icon: Bot },
     { name: "Community", href: "/community", icon: Users },
     { name: "Learning", href: "/learning", icon: BookOpen },
@@ -205,33 +218,54 @@ const MobileMenu = ({ isOpen, onClose }) => {
 
   return (
     <div className="fixed inset-0 z-50 lg:hidden">
-      <div className="fixed inset-0 bg-black/50" onClick={onClose}></div>
-      <div className="fixed right-0 top-0 h-full w-80 bg-white shadow-xl">
-        <div className="flex items-center justify-between p-4 border-b">
-          <span className="text-lg font-semibold">Menu</span>
-          <Button variant="ghost" size="icon" onClick={onClose}>
+      <div className="fixed inset-0 bg-black/50 backdrop-blur-sm" onClick={onClose}></div>
+      <div className="fixed right-0 top-0 h-full w-[85%] max-w-sm bg-white dark:bg-gray-900 shadow-2xl">
+        <div className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800">
+          <div className="flex items-center space-x-2">
+            <div className="w-8 h-8 bg-gradient-to-r from-primary to-primary-glow rounded-full flex items-center justify-center">
+              <span className="text-primary-foreground font-bold text-sm">F</span>
+            </div>
+            <span className="text-lg font-bold gradient-title">FinWise</span>
+          </div>
+          <Button 
+            variant="ghost" 
+            size="icon" 
+            onClick={onClose}
+            className="hover:bg-gray-200 dark:hover:bg-gray-700"
+          >
             <X className="h-5 w-5" />
           </Button>
         </div>
-        <div className="p-4 space-y-2">
+        <div className="p-4 space-y-2 overflow-y-auto h-[calc(100%-80px)]">
           {mobileMenuItems.map((item, index) => (
             <Link
               key={index}
               href={item.href}
               onClick={onClose}
-              className="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-50 transition-colors"
+              className="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
             >
-              <item.icon size={20} className="text-primary" />
-              <span className="font-medium">{item.name}</span>
+              <div className="p-2 bg-gray-100 dark:bg-gray-800 rounded-lg">
+                <item.icon size={20} className="text-primary" />
+              </div>
+              <span className="font-medium text-gray-900 dark:text-gray-100">{item.name}</span>
             </Link>
           ))}
-          <div className="pt-4 mt-4 border-t">
+          <div className="pt-4 mt-4 border-t border-gray-200 dark:border-gray-700">
             <Link href="/transaction/create" onClick={onClose}>
               <Button className="w-full btn-hero flex items-center justify-center gap-2">
                 <PenBox size={16} />
                 Add Transaction
               </Button>
             </Link>
+            <div className="mt-4 p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
+              <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">Need help?</p>
+              <Link href="/chatbot" onClick={onClose}>
+                <Button variant="outline" className="w-full flex items-center justify-center gap-2">
+                  <Bot size={16} />
+                  Chat with AI Assistant
+                </Button>
+              </Link>
+            </div>
           </div>
         </div>
       </div>
@@ -244,14 +278,14 @@ const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   return (
-    <header className="fixed top-0 w-full bg-background/80 backdrop-blur-md z-50 border-b border-border/50">
-      <nav className="container mx-auto px-4 py-4 flex items-center justify-between">
+    <header className="fixed top-0 w-full bg-white dark:bg-gray-900 md:bg-background/80 md:backdrop-blur-md z-50 border-b border-gray-200 dark:border-gray-800 md:border-border/50 shadow-sm md:shadow-none">
+      <nav className="container mx-auto px-4 py-3 md:py-4 flex items-center justify-between">
         <Link href="/">
           <div className="flex items-center space-x-2">
-            <div className="w-10 h-10 bg-gradient-to-r from-primary to-primary-glow rounded-full flex items-center justify-center">
-              <span className="text-primary-foreground font-bold text-lg">F</span>
+            <div className="w-8 h-8 md:w-10 md:h-10 bg-gradient-to-r from-primary to-primary-glow rounded-full flex items-center justify-center shadow-lg">
+              <span className="text-primary-foreground font-bold text-sm md:text-lg">F</span>
             </div>
-            <span className="text-2xl font-bold gradient-title">FinWise</span>
+            <span className="text-xl md:text-2xl font-bold gradient-title">FinWise</span>
           </div>
         </Link>
 
@@ -299,7 +333,7 @@ const Header = () => {
         </div>
 
         {/* Action Buttons */}
-        <div className="flex items-center space-x-4">
+        <div className="flex items-center space-x-2 md:space-x-4">
           <SignedOut>
             <SignInButton mode="modal">
               <Button variant="ghost" className="hidden md:inline-flex">
@@ -308,9 +342,10 @@ const Header = () => {
             </SignInButton>
             
             <SignInButton mode="modal" forceRedirectUrl="/dashboard">
-              <Button className="btn-hero">
-                Get Started
-                <ArrowRight className="ml-2 h-4 w-4" />
+              <Button className="btn-hero text-sm md:text-base px-3 md:px-4">
+                <span className="hidden sm:inline">Get Started</span>
+                <span className="sm:hidden">Start</span>
+                <ArrowRight className="ml-1 md:ml-2 h-3 w-3 md:h-4 md:w-4" />
               </Button>
             </SignInButton>
           </SignedOut>
@@ -326,7 +361,7 @@ const Header = () => {
             <UserButton
               appearance={{
                 elements: {
-                  avatarBox: "w-10 h-10",
+                  avatarBox: "w-8 h-8 md:w-10 md:h-10",
                 },
               }}
             />
@@ -335,7 +370,7 @@ const Header = () => {
           <Button 
             variant="ghost" 
             size="icon" 
-            className="md:hidden"
+            className="md:hidden hover:bg-gray-100 dark:hover:bg-gray-800"
             onClick={() => setIsMobileMenuOpen(true)}
           >
             <Menu className="h-5 w-5" />

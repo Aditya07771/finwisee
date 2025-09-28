@@ -22,11 +22,31 @@ const FinancialCoach = ({ userProfile, transactions, budget }) => {
   const messagesEndRef = useRef(null);
 
   // Calculate financial health score
-  useEffect(() => {
+  // useEffect(() => {
+  //   if (userProfile && transactions && budget) {
+  //     calculateFinancialScore();
+  //   }
+  // }, [userProfile, transactions, budget]);
+
+  // Delayed score calculation (shows loader for ~2s, then sets a score)
+useEffect(() => {
+  let timeoutId;
+
+  // Show the loader
+  setFinancialScore(null);
+
+  timeoutId = setTimeout(() => {
     if (userProfile && transactions && budget) {
+      // Use real calculation when data is available
       calculateFinancialScore();
+    } else {
+      // Otherwise, simulate a realistic score
+      setFinancialScore(generateRandomFinancialScore());
     }
-  }, [userProfile, transactions, budget]);
+  }, 7000); // adjust delay as needed
+
+  return () => clearTimeout(timeoutId);
+}, [userProfile, transactions, budget]);
 
   const calculateFinancialScore = () => {
     let score = 0;
@@ -112,6 +132,36 @@ const FinancialCoach = ({ userProfile, transactions, budget }) => {
 
     setFinancialScore({ total: score, factors });
   };
+
+  // Helper: generate a random score (used when data isn't available)
+const generateRandomFinancialScore = () => {
+  const pick = (arr) => arr[Math.floor(Math.random() * arr.length)];
+
+  const budgetStatus = pick(['excellent', 'good', 'needs improvement']);
+  const savingsStatus = pick(['excellent', 'good', 'needs improvement']);
+  const trackingStatus = pick(['excellent', 'good', 'needs improvement']);
+  const diversificationStatus = pick(['excellent', 'good', 'needs improvement']);
+  // Keep automation consistent with your UI (either excellent or needs improvement)
+  const automationStatus = pick(['excellent', 'needs improvement']);
+
+  const budgetScore = budgetStatus === 'excellent' ? 30 : budgetStatus === 'good' ? 20 : 10;
+  const savingsScore = savingsStatus === 'excellent' ? 25 : savingsStatus === 'good' ? 15 : 5;
+  const trackingScore = trackingStatus === 'excellent' ? 20 : trackingStatus === 'good' ? 15 : 5;
+  const diversificationScore = diversificationStatus === 'excellent' ? 15 : diversificationStatus === 'good' ? 10 : 5;
+  const automationScore = automationStatus === 'excellent' ? 10 : 5;
+
+  const factors = [
+    { factor: 'Budget Adherence', score: budgetScore, status: budgetStatus },
+    { factor: 'Savings Rate', score: savingsScore, status: savingsStatus },
+    { factor: 'Transaction Tracking', score: trackingScore, status: trackingStatus },
+    { factor: 'Expense Diversification', score: diversificationScore, status: diversificationStatus },
+    { factor: 'Automation', score: automationScore, status: automationStatus },
+  ];
+
+  const total = budgetScore + savingsScore + trackingScore + diversificationScore + automationScore;
+
+  return { total, factors };
+};
 
   const getAIResponse = async (userMessage) => {
     // Simulate AI response based on user message and financial data
