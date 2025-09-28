@@ -1,3 +1,5 @@
+// path: components/Hero.jsx
+
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { ArrowRight, Play, TrendingUp, Award, Users } from "lucide-react";
