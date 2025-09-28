@@ -6,11 +6,12 @@ import Features from "@/components/Features";
 import HowItWorks from "@/components/HowItWorks";
 import CallToAction from "@/components/CallToAction";
 import Footer from "@/components/Footer";
+import Header from "@/components/Header"
 
 const LandingPage = () => {
   return (
     <div className="min-h-screen bg-background">
-      {/* Header is already included in layout.js, so we don't include it here */}
+      <Header />
       <Hero />
       <Features />
       <HowItWorks />
