@@ -7,7 +7,10 @@ import {
   Mail, 
   MapPin, 
   Phone,
-  Heart
+  Heart,
+  User,
+  Globe,
+  Code
 } from "lucide-react";
 
 const Footer = () => {
@@ -30,15 +33,15 @@ const Footer = () => {
               expert guidance, and AI-powered insights.
             </p>
             <div className="flex space-x-3">
-              <div className="w-8 h-8 bg-accent hover:bg-primary hover:text-primary-foreground rounded-full flex items-center justify-center cursor-pointer transition-colors">
+              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="w-8 h-8 bg-accent hover:bg-primary hover:text-primary-foreground rounded-full flex items-center justify-center cursor-pointer transition-colors">
                 <Twitter className="h-4 w-4" />
-              </div>
-              <div className="w-8 h-8 bg-accent hover:bg-primary hover:text-primary-foreground rounded-full flex items-center justify-center cursor-pointer transition-colors">
+              </a>
+              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="w-8 h-8 bg-accent hover:bg-primary hover:text-primary-foreground rounded-full flex items-center justify-center cursor-pointer transition-colors">
                 <Linkedin className="h-4 w-4" />
-              </div>
-              <div className="w-8 h-8 bg-accent hover:bg-primary hover:text-primary-foreground rounded-full flex items-center justify-center cursor-pointer transition-colors">
+              </a>
+              <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="w-8 h-8 bg-accent hover:bg-primary hover:text-primary-foreground rounded-full flex items-center justify-center cursor-pointer transition-colors">
                 <Github className="h-4 w-4" />
-              </div>
+              </a>
             </div>
           </div>
 
@@ -54,16 +57,36 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Company */}
+          {/* Developer Info */}
           <div className="space-y-4">
-            <h3 className="font-semibold text-foreground">Company</h3>
-            <ul className="space-y-2 text-sm">
-              <li><a href="#about" className="text-muted-foreground hover:text-primary transition-colors">About Us</a></li>
-              <li><a href="#careers" className="text-muted-foreground hover:text-primary transition-colors">Careers</a></li>
-              <li><a href="#blog" className="text-muted-foreground hover:text-primary transition-colors">Blog</a></li>
-              <li><a href="#press" className="text-muted-foreground hover:text-primary transition-colors">Press</a></li>
-              <li><a href="#partners" className="text-muted-foreground hover:text-primary transition-colors">Partners</a></li>
-            </ul>
+            <h3 className="font-semibold text-foreground">Developer</h3>
+            <div className="space-y-3 text-sm">
+              <div className="flex items-center space-x-2 text-muted-foreground">
+                <User className="h-4 w-4" />
+                <span>Aditya Nishad</span>
+              </div>
+              <div className="flex items-center space-x-2 text-muted-foreground">
+                <Mail className="h-4 w-4" />
+                <a href="mailto:adityanishad3005@gmail.com" className="hover:text-primary transition-colors">
+                  adityanishad3005@gmail.com
+                </a>
+              </div>
+              <div className="flex items-center space-x-2 text-muted-foreground">
+                <MapPin className="h-4 w-4" />
+                <span>Mumbai, Maharashtra</span>
+              </div>
+              <div className="flex items-center space-x-2 text-muted-foreground">
+                <Code className="h-4 w-4" />
+                <span>Full Stack Developer</span>
+              </div>
+              <div className="flex items-center space-x-2 text-muted-foreground">
+                <Globe className="h-4 w-4" />
+                <span>India</span>
+              </div>
+            </div>
+            <Badge variant="secondary" className="text-xs">
+              💻 Open for Collaborations
+            </Badge>
           </div>
 
           {/* Contact */}
@@ -76,11 +99,11 @@ const Footer = () => {
               </div>
               <div className="flex items-center space-x-2 text-muted-foreground">
                 <Phone className="h-4 w-4" />
-                <span>+1 (555) 123-4567</span>
+                <span>+91 7208739200</span>
               </div>
               <div className="flex items-center space-x-2 text-muted-foreground">
                 <MapPin className="h-4 w-4" />
-                <span>San Francisco, CA</span>
+                <span>Mumbai</span>
               </div>
             </div>
             <Badge variant="secondary" className="text-xs">
@@ -101,7 +124,7 @@ const Footer = () => {
           <div className="flex items-center space-x-1 text-sm text-muted-foreground">
             <span>Made with</span>
             <Heart className="h-4 w-4 text-destructive fill-destructive" />
-            <span>for financial freedom</span>
+            <span>by Aditya Nishad</span>
           </div>
         </div>
       </div>

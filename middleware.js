@@ -55,27 +55,26 @@
 //   ],
 // };
 
-
-// middleware.js (Edge-friendly)
+import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 
-export function middleware(req) {
-  // Example: only redirect unauthenticated users without Clerk imports
-  const url = req.nextUrl.clone();
+const isProtectedRoute = createRouteMatcher([
+  "/dashboard(.*)",
+  "/account(.*)",
+  "/transaction(.*)",
+]);
 
-  // Optionally redirect based on a cookie or simple check
-  if (url.pathname.startsWith("/dashboard") && !req.cookies.get("clerk_session")) {
-    url.pathname = "/sign-in";
-    return NextResponse.redirect(url);
+export default clerkMiddleware(async (auth, req) => {
+  const { userId } = await auth();
+
+  if (!userId && isProtectedRoute(req)) {
+    const { redirectToSignIn } = await auth();
+    return redirectToSignIn();
   }
 
   return NextResponse.next();
-}
+});
 
 export const config = {
-  matcher: [
-    "/dashboard(.*)",
-    "/account(.*)",
-    "/transaction(.*)",
-  ],
+  matcher: ["/dashboard(.*)", "/account(.*)", "/transaction(.*)"],
 };
